@@ -27,11 +27,11 @@ public class Chamado implements Serializable {
     private String titulo;
     private String observacoes;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tecnico_id")
     private Tecnico tecnico;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
