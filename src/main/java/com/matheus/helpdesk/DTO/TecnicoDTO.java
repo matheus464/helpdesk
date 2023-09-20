@@ -9,8 +9,9 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import com.matheus.helpdesk.Pessoa;
 
-public class TecnicoDTO implements Serializable {
+public class TecnicoDTO implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private Integer id;
@@ -23,8 +24,11 @@ public class TecnicoDTO implements Serializable {
     private LocalDate dataCriacao = LocalDate.now();
 
     public TecnicoDTO(){
-
+        super();
+        Pessoa p = new Pessoa() {};
+        p.addPerfis(Perfil.CLIENTE);
     }
+
     public TecnicoDTO(Tecnico obj){
         this.id = obj.getId();
         this.nome = obj.getNome();
@@ -33,6 +37,7 @@ public class TecnicoDTO implements Serializable {
         this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
+        obj.addPerfis(Perfil.CLIENTE);
     }
 
     public Integer getId() {

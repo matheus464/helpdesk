@@ -1,12 +1,14 @@
 package com.matheus.helpdesk;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.matheus.helpdesk.DTO.TecnicoDTO;
 import com.matheus.helpdesk.domain.enums.Perfil;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Tecnico extends Pessoa{
@@ -23,6 +25,17 @@ public class Tecnico extends Pessoa{
 
     public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
         super(id, nome, cpf, email, senha);
+        addPerfis(Perfil.CLIENTE);
+    }
+
+    public Tecnico(TecnicoDTO obj){
+        this.id = obj.getId();
+        this.nome = obj.getNome();
+        this.cpf = obj.getCpf();
+        this.email = obj.getEmail();
+        this.senha = obj.getSenha();
+        this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+        this.dataCriacao = obj.getDataCriacao();
     }
 
     public List<Chamado> getChamados() {
