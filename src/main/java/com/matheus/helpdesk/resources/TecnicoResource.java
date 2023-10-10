@@ -3,6 +3,7 @@ package com.matheus.helpdesk.resources;
 import com.matheus.helpdesk.DTO.TecnicoDTO;
 import com.matheus.helpdesk.Tecnico;
 import com.matheus.helpdesk.services.TecnicoService;
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class TecnicoResource {
     }
 
     @PostMapping
-    public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO objNew){
+    public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO objNew){
         Tecnico tecnico = service.create(objNew);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(tecnico.getId()).toUri();
         return ResponseEntity.created(uri).build();

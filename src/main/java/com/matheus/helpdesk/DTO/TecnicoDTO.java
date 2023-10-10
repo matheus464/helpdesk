@@ -10,14 +10,19 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import com.matheus.helpdesk.Pessoa;
+import jakarta.validation.constraints.NotNull;
 
 public class TecnicoDTO implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private Integer id;
+    @NotNull(message = "O campo Nome é obrigatório")
     private String nome;
+    @NotNull(message = "O campo CPF é obrigatório")
     private String cpf;
+    @NotNull(message = "O campo email é obrigatório")
     private String email;
+    @NotNull(message = "O campo senha é obrigatório")
     private String senha;
     private Set<Integer> perfis = new HashSet<>();
     @JsonFormat(pattern = "dd/MM/yyyy")
