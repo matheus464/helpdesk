@@ -15,4 +15,11 @@ public class HandlerException {
                 exp.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandartException> DataIntegrityViolationException(DataIntegrityViolationException exp, HttpServletRequest request){
+        StandartException error = new StandartException(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Violação de dados!",
+                exp.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
 }
