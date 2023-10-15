@@ -3,6 +3,10 @@ package com.matheus.helpdesk;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.matheus.helpdesk.domain.enums.Perfil;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+
 
 import java.io.Serializable;
 import java.time.LocalDate;

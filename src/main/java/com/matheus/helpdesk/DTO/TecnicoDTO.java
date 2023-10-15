@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import com.matheus.helpdesk.Pessoa;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.br.CPF;
 
 public class TecnicoDTO implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -24,17 +25,19 @@ public class TecnicoDTO implements Serializable{
     private String email;
     @NotNull(message = "O campo senha é obrigatório")
     private String senha;
+
     private Set<Integer> perfis = new HashSet<>();
+
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCriacao = LocalDate.now();
 
     public TecnicoDTO(){
         super();
-        Pessoa p = new Pessoa() {};
-        p.addPerfis(Perfil.CLIENTE);
+        addPerfil(Perfil.TECNICO);
     }
 
     public TecnicoDTO(Tecnico obj){
+        super();
         this.id = obj.getId();
         this.nome = obj.getNome();
         this.cpf = obj.getCpf();
@@ -42,7 +45,6 @@ public class TecnicoDTO implements Serializable{
         this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
-        obj.addPerfis(Perfil.CLIENTE);
     }
 
     public Integer getId() {
@@ -89,7 +91,7 @@ public class TecnicoDTO implements Serializable{
         return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
     }
 
-    public void setPerfis(Perfil perfil) {
+    public void addPerfil(Perfil perfil) {
         this.perfis.add(perfil.getCodigo());
     }
 

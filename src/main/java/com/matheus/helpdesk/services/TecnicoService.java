@@ -6,6 +6,7 @@ import com.matheus.helpdesk.Tecnico;
 import com.matheus.helpdesk.exceptions.ObjectNotFound;
 import com.matheus.helpdesk.repositories.PessoaRepository;
 import com.matheus.helpdesk.repositories.TecnicoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,14 @@ public class TecnicoService {
         validaPorCpfEEmail(objNew);
         Tecnico tecnico = new Tecnico(objNew);
         return repository.save(tecnico);
+    }
+
+    public Tecnico update(Integer id, TecnicoDTO tecnicoDTO) {
+        tecnicoDTO.setId(id);
+        Tecnico oldObj = findById(id);
+        validaPorCpfEEmail(tecnicoDTO);
+        oldObj = new Tecnico(tecnicoDTO);
+        return repository.save(oldObj);
     }
 
     public void validaPorCpfEEmail(TecnicoDTO objDTO){

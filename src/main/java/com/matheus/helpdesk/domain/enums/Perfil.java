@@ -1,6 +1,8 @@
 package com.matheus.helpdesk.domain.enums;
 
-public enum Perfil {
+import java.io.Serializable;
+
+public enum Perfil implements Serializable {
     
     ADMIN(0, "ROLE_ADMIN"),
     CLIENTE(1, "ROLE_CLIENTE"), 
