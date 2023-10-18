@@ -10,8 +10,10 @@ import com.matheus.helpdesk.exceptions.ObjectNotFound;
 import com.matheus.helpdesk.repositories.ChamadoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +49,9 @@ public class ChamadoService {
         if(objDTO.getId() != null){
             chamado.setId(objDTO.getId());
         }
+        if(objDTO.getStatus().equals(2)){
+            chamado.setDataFehamento(LocalDate.now());
+        }
         chamado.setCliente(cliente);
         chamado.setTecnico(tecnico);
         chamado.setPrioridade(Prioridade.toEnum(objDTO.getPrioridade()));
@@ -54,5 +59,11 @@ public class ChamadoService {
         chamado.setTitulo(objDTO.getTitulo());
         chamado.setObservacoes(objDTO.getObservacoes());
         return chamado;
+    }
+
+    public Chamado update(Integer id, ChamadoDTO obj) {
+        obj.setId(id);
+        Chamado oldObj = newChamado(obj);
+        return chamadoRepository.save(oldObj);
     }
 }
