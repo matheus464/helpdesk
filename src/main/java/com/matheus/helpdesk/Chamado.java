@@ -1,6 +1,7 @@
 package com.matheus.helpdesk;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.matheus.helpdesk.DTO.ChamadoDTO;
 import com.matheus.helpdesk.domain.enums.Prioridade;
 import com.matheus.helpdesk.domain.enums.Status;
 import jakarta.persistence.*;

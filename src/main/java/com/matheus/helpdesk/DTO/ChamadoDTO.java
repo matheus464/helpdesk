@@ -2,6 +2,7 @@ package com.matheus.helpdesk.DTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.matheus.helpdesk.Chamado;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,11 +15,17 @@ public class ChamadoDTO implements Serializable {
     private LocalDate dataAbertura = LocalDate.now();
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFehamento;
+    @NotNull(message = "O campo Prioridade é requerido")
     private Integer prioridade;
+    @NotNull(message = "O campo STATUS é requerido")
     private Integer status;
+    @NotNull(message = "O campo TÍTULO é requerido")
     private String titulo;
+    @NotNull(message = "O campo OBSERVAÇÕES é requerido")
     private String observacoes;
+    @NotNull(message = "O campo TECNICO é requerido")
     private Integer tecnico;
+    @NotNull(message = "O campo CLIENTE é requerido")
     private Integer cliente;
     private String nomeTecnico;
     private String nomeCliente;
